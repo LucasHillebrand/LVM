@@ -39,7 +39,7 @@ none = null
 
 255  hlt [halt]
 
-//// ---- ---- ////
+//// ---- for compiler version 2 ---- ////
 
 Example command:
 
