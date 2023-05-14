@@ -99,13 +99,13 @@ SOC VM_PSH(SOC self, byte thread, byte args[3]){
 }
 
 SOC VM_DB(SOC self, byte thread, byte args[3]){return self;}
-SOC VM_DR(SOC self, byte thread, byte args[3]){
+SOC VM_PV(SOC self, byte thread, byte args[3]){
     u64 index = self.cpu.threads[thread].pc + 4;
-    byte value[8];
+    byte value[8] = {0};
     for (u64 i=index;i<index+8;i++){
         value[i-index]=self.mem[i];
     }
-    byteClone(value, 8, self.cpu.threads[thread].reg[args[0]]);
+    self.cpu.threads[thread].stack = push(self.cpu.threads[thread].stack, value);
     return self;
 }
 
@@ -162,6 +162,13 @@ SOC VM_HLT(SOC self, byte thread, byte args[3]){
     for (byte i=0;i<8;i++){
         self.cpu.threads[i].init=0;
     }
+    return self;
+}
+
+SOC VM_PI(SOC self, byte thread, byte args[3]){
+    byte val[8] = {0};
+    toBytes(self.cpu.threads[thread].pc, val);
+    self.cpu.threads[thread].stack = push(self.cpu.threads[thread].stack, val);
     return self;
 }
 
@@ -271,8 +278,8 @@ SOC exec(SOC self, byte thread){
         self = VM_DB(self, thread, sysargs);
         index+=sysargs[0];
         break;
-    case CMD_DR:
-        self = VM_DR(self, thread, sysargs);
+    case CMD_PV:
+        self = VM_PV(self, thread, sysargs);
         index+=8;
         break;
     case CMD_SPM:
@@ -296,7 +303,11 @@ SOC exec(SOC self, byte thread){
     case CMD_HLT:
         self = VM_HLT(self, thread, sysargs);
         break;
+    case CMD_PI:
+        self = VM_PI(self, thread, sysargs);
+        break;
     }
+        
     if (self.cpu.threads[thread].pc == org){
         self.cpu.threads[thread].pc=index;
     }

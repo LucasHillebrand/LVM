@@ -2,6 +2,8 @@ src, dst, reg == register
 
 len == byte (0 - 255)
 
+> == todo
+
 none = null
 
 32 bit instructions
@@ -24,7 +26,7 @@ none = null
 10  psh [push value from register to stack] {reg} // push = 1
 
 11  db [define byte] {len}
-12  dr [define register (!! always 8 bytes)] {dst}(, val)
+12	pv [push value] (!! always 8 bytes) (val)
 
 13  spm [set pin mode] // pop = 1 (0 = read, 1 = write)
 14  spp [set pin ptr] // pop = 1
@@ -34,6 +36,8 @@ none = null
 17  nth [init another thread] // pop = 2 (top -> last){thread, starting point}
 18  sth [stop a thread] // pop = 1
 19  hlt [halt]
+
+20	pi [push index(pc)]
 
 
 //// ---- ---- ////

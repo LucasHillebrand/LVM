@@ -44,7 +44,7 @@ typedef struct SOC {
 #define CMD_PSH 10 // push register to curr
 
 #define CMD_DB 11 // define byte
-#define CMD_DR 12 // define register
+#define CMD_PV 12 // define register
 
 #define CMD_SPM 13 // set pinmode
 #define CMD_SPP 14 // set pin ptr
@@ -54,6 +54,8 @@ typedef struct SOC {
 #define CMD_NTH 17 // new thread
 #define CMD_STH 18 // stop thread
 #define CMD_HLT 19 // halt machine
+
+#define CMD_PI 20 // push pc
 
 SOC VM_ADD(SOC self, byte thread, byte args[3]);
 SOC VM_SUB(SOC self, byte thread, byte args[3]);
@@ -66,7 +68,7 @@ SOC VM_SMP(SOC self, byte thread, byte args[3]);
 SOC VM_MOV(SOC self, byte thread, byte args[3]);
 SOC VM_PSH(SOC self, byte thread, byte args[3]);
 SOC VM_DB(SOC self, byte thread, byte args[3]);
-SOC VM_DR(SOC self, byte thread, byte args[3]);
+SOC VM_PV(SOC self, byte thread, byte args[3]);
 SOC VM_SPM(SOC self, byte thread, byte args[3]);
 SOC VM_SPP(SOC self, byte thread, byte args[3]);
 SOC VM_RPV(SOC self, byte thread, byte args[3]);
@@ -74,6 +76,7 @@ SOC VM_WPV(SOC self, byte thread, byte args[3]);
 SOC VM_HLT(SOC self, byte thread, byte args[3]);
 SOC VM_NTH(SOC self, byte thread, byte args[3]);
 SOC VM_STH(SOC self, byte thread, byte args[3]);
+SOC VM_PI(SOC self, byte thread, byte args[3]);
 
 void printVM(SOC self);
 SOC createVM(u64 memsize);
