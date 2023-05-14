@@ -27,18 +27,17 @@ none = null
 
 11  db [define byte] {len}
 12	pv [push value] (!! always 8 bytes) (val)
+13	pi [push index(pc)]
 
-13  spm [set pin mode] // pop = 1 (0 = read, 1 = write)
-14  spp [set pin ptr] // pop = 1
-15  rpv [read pin value] // push = 1
-16  wpv [write pin value] // pop = 1
+14  spm [set pin mode] // pop = 1 (0 = read, 1 = write)
+15  spp [set pin ptr] // pop = 1
+16  rpv [read pin value] // push = 1
+17  wpv [write pin value] // pop = 1
 
-17  nth [init another thread] // pop = 2 (top -> last){thread, starting point}
-18  sth [stop a thread] // pop = 1
-19  hlt [halt]
+18  nth [init another thread] // pop = 2 (top -> last){thread, starting point}
+19  sth [stop a thread] // pop = 1
 
-20	pi [push index(pc)]
-
+255  hlt [halt]
 
 //// ---- ---- ////
 
