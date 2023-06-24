@@ -1,6 +1,7 @@
 #include "../vmbase.h"
 #include "../math.h"
 #include "../stack.h"
+#include "../instructionset.h"
 
 void byteClone(byte org[8], byte size, byte res[8]){
     for (byte i=0;i<8 && i < size;i++){
@@ -172,13 +173,13 @@ SOC VM_PI(SOC self, byte thread, byte args[3]){
     return self;
 }
 
-void printVM(SOC self){
-    if (self.memsize>0){
-        /*printf("[ ");
+void printVM(SOC self, byte extended){
+    if (self.memsize>0 && extended){
+        printf("[ ");
         for (u64 i = 0;i<self.memsize-1;i++){
             printf("%u, ",self.mem[i]);
         }
-        printf("%u ]\n\n", self.mem[self.memsize-1]);*/
+        printf("%u ]\n\n", self.mem[self.memsize-1]);
     }
     for (byte i=0;i<8;i++){
         printf("\n --- thread: %u --- \n\n", i);

@@ -1,0 +1,91 @@
+
+// file >> "../demo/power.lasm"
+
+pv 255
+pv 1024
+smp
+str 1
+
+// define calculation here
+pv 7 << b (b^n)
+mov 0
+pv 2 << n
+mov 1
+
+pv 1 << out
+mov 7
+
+psh 0
+pv 1024
+jiz
+
+pi << first loop
+mov 2
+
+psh 7 << create backup
+mov 3
+
+pv 0 << result
+mov 4
+
+pi << second loop init
+mov 5
+
+psh 4 << calculation
+psh 0
+add
+mov 4
+
+psh 3
+pv 1 << subtract 1
+sub
+mov 3
+
+psh 3
+psh 5 << jump
+jnz
+
+psh 4 << save new result
+mov 7
+
+psh 1
+pv 1
+sub << subtract 1
+mov 1
+
+psh 1
+psh 2
+jnz << jump
+hlt
+
+// file >> "../demo/multiplication.lasm"
+
+var base 255
+var operant 255
+
+pub main .
+
+pv $base
+mov 0
+
+pi
+mov 2
+
+psh 1
+pv $operant
+add
+mov 1
+
+psh 0
+pv 1
+sub
+mov 0
+
+psh 0
+psh 2
+jnz
+
+psh 1
+mov 7
+
+hlt
